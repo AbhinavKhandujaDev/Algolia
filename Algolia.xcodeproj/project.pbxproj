@@ -59,15 +59,39 @@
 			isa = PBXGroup;
 			children = (
 				1C9385CD2315536C00341E1B /* AppDelegate.swift */,
-				1C9385CF2315536C00341E1B /* ViewController.swift */,
+				1CE0864923190C1E008969FD /* Model */,
+				1CE0864A23190C28008969FD /* View */,
+				1CE0864B23190C34008969FD /* Controller */,
 				1C9385D12315536C00341E1B /* Main.storyboard */,
 				1C9385D42315536E00341E1B /* Assets.xcassets */,
 				1C9385D62315536E00341E1B /* LaunchScreen.storyboard */,
 				1C9385D92315536E00341E1B /* Info.plist */,
-				1C9385DF231554C500341E1B /* Model.swift */,
-				1C9385E12315577E00341E1B /* AlgoliaCell.swift */,
 			);
 			path = Algolia;
+			sourceTree = "<group>";
+		};
+		1CE0864923190C1E008969FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1C9385DF231554C500341E1B /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1CE0864A23190C28008969FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1C9385E12315577E00341E1B /* AlgoliaCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1CE0864B23190C34008969FD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1C9385CF2315536C00341E1B /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

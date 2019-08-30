@@ -19,20 +19,14 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Count: 0"
-        fetchData(page: page) {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.navigationItem.title = "Count: \(self.algoliaData.count)"
-            }
-        }
+        fetchData(page: page)
     }
     
-    fileprivate func fetchData(page: Int, completion: @escaping(()->())) {
+    fileprivate func fetchData(page: Int) {
         let url = URL(string: "https://hn.algolia.com/api/v1/search_by_date?tags=story&page=\(page)")
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("url is ",url)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let receivedData = data else {return}
             do {
@@ -40,7 +34,11 @@ class ViewController: UITableViewController {
                 decodedJson.hits.forEach({ (hit) in
                     self.algoliaData.append(hit)
                 })
-                completion()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.navigationItem.title = "Count: \(self.algoliaData.count)"
+                    self.page += 1
+                }
             }catch {
                 print("Error in fetching JSON: ",error)
             }
@@ -71,13 +69,7 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == algoliaData.count - 1 {
-            fetchData(page: page + 1) {
-                DispatchQueue.main.async {
-                    self.page += 1
-                    self.tableView.reloadData()
-                    self.navigationItem.title = "Count: \(self.algoliaData.count)"
-                }
-            }
+            fetchData(page: page)
         }
     }
 }
